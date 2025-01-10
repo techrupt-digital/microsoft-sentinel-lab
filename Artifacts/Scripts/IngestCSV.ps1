@@ -224,4 +224,4 @@ Write-Host $status
 
 Write-Host $status
 
-Start-Sleep -Seconds 60
+Start-Sleep -Seconds 10

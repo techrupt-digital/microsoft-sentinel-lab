@@ -164,41 +164,41 @@ $eventsData = Import-Csv "query_data.csv"
 
 #Write-Host $status
 
-$status = SendToLogA -url "https://raw.githubusercontent.com/techrupt-digital/microsoft-sentinel-lab/refs/heads/main/Artifacts/Telemetry/securityEvents.csv" -EventsTable "SecurityEvent"
+#$status = SendToLogA -url "https://raw.githubusercontent.com/techrupt-digital/microsoft-sentinel-lab/refs/heads/main/Artifacts/Telemetry/securityEvents.csv" -EventsTable "SecurityEvent"
 
-Write-Host $status
+#Write-Host $status
 
-$status = SendToLogA -url "https://raw.githubusercontent.com/techrupt-digital/microsoft-sentinel-lab/refs/heads/main/Artifacts/Telemetry/disable_accounts.csv" -EventsTable "SigninLogs"
+#$status = SendToLogA -url "https://raw.githubusercontent.com/techrupt-digital/microsoft-sentinel-lab/refs/heads/main/Artifacts/Telemetry/disable_accounts.csv" -EventsTable "SigninLogs"
 
-Write-Host $status
+#Write-Host $status
 
 $status = SendToLogA -url "https://raw.githubusercontent.com/techrupt-digital/microsoft-sentinel-lab/refs/heads/main/Artifacts/Telemetry/office_activity_inbox_rule.csv" -EventsTable "OfficeActivity"
 
 Write-Host $status
 
-$status = SendToLogA -url "https://raw.githubusercontent.com/techrupt-digital/microsoft-sentinel-lab/refs/heads/main/Artifacts/Telemetry/azureActivity_adele.csv" -EventsTable "AzureActivity"
+#$status = SendToLogA -url "https://raw.githubusercontent.com/techrupt-digital/microsoft-sentinel-lab/refs/heads/main/Artifacts/Telemetry/azureActivity_adele.csv" -EventsTable "AzureActivity"
 
-Write-Host $status
+#Write-Host $status
 
 $status = SendToLogA -url "https://raw.githubusercontent.com/techrupt-digital/microsoft-sentinel-lab/refs/heads/main/Artifacts/Telemetry/office_activity.csv" -EventsTable "OfficeActivity"
 
 Write-Host $status
 
-$status = SendToLogA -url "https://raw.githubusercontent.com/techrupt-digital/microsoft-sentinel-lab/refs/heads/main/Artifacts/Telemetry/sign-in_adelete.csv" -EventsTable "SigninLogs"
+#$status = SendToLogA -url "https://raw.githubusercontent.com/techrupt-digital/microsoft-sentinel-lab/refs/heads/main/Artifacts/Telemetry/sign-in_adelete.csv" -EventsTable "SigninLogs"
 
-Write-Host $status
+#Write-Host $status
 
 $status = SendToLogA -url "https://raw.githubusercontent.com/techrupt-digital/microsoft-sentinel-lab/refs/heads/main/Artifacts/Telemetry/model_evasion_detection_CL_alerts.csv" -EventsTable "OfficeActivity"
 
 Write-Host $status
 
-$status = SendToLogA -url "https://raw.githubusercontent.com/techrupt-digital/microsoft-sentinel-lab/refs/heads/main/Artifacts/Telemetry/solarigate-beacon-umbrella.csv" -EventsTable "Cisco_Umbrella_dns"
+#$status = SendToLogA -url "https://raw.githubusercontent.com/techrupt-digital/microsoft-sentinel-lab/refs/heads/main/Artifacts/Telemetry/solarigate-beacon-umbrella.csv" -EventsTable "Cisco_Umbrella_dns"
 
-Write-Host $status
+#Write-Host $status
 
-$status = SendToLogA -url "https://raw.githubusercontent.com/techrupt-digital/microsoft-sentinel-lab/refs/heads/main/Artifacts/Telemetry/AuditLogs_Hunting.csv" -EventsTable "AuditLogs"
+#$status = SendToLogA -url "https://raw.githubusercontent.com/techrupt-digital/microsoft-sentinel-lab/refs/heads/main/Artifacts/Telemetry/AuditLogs_Hunting.csv" -EventsTable "AuditLogs"
 
-Write-Host $status
+#Write-Host $status
 
 #$status = SendToLogA -url "https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Artifacts/Telemetry/ABAPAppLog_CL.csv" -EventsTable "ABAPAppLog_CL"
 

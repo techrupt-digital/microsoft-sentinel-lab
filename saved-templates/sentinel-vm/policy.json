@@ -1,0 +1,193 @@
+{
+  "permissions": [
+    {
+      "actions": ["*"],
+      "notActions": [
+        "Microsoft.Authorization/*/Delete",
+        "Microsoft.Authorization/*/Write",
+        "Microsoft.Authorization/elevateAccess/Action",
+        "Microsoft.MarketplaceOrdering/*",
+        "Microsoft.Resources/tags/write",
+        "Microsoft.Resources/tags/delete",
+        "Microsoft.OperationsManagement/solutions/write",
+        "Microsoft.SecurityInsights/settings/write",
+        "Microsoft.Logic/integrationAccounts/*",
+        "Microsoft.Logic/integrationServiceEnvironments/*",
+        "Microsoft.Resources/deploymentScripts/*",
+        "Microsoft.ManagedIdentity/userAssignedIdentities/*",
+        "Microsoft.ContainerInstance/containerGroups/*",
+        "Microsoft.Storage/storageAccounts/*"
+      ]
+    }
+  ],
+  "parameters": {
+    "allowedLocations": {
+      "type": "array",
+      "metadata": {
+        "description": "The list of locations that can be specified when deploying resources",
+        "strongType": "location",
+        "displayName": "Allowed locations"
+      }
+    },
+    "allowedServices": {
+      "type": "array",
+      "metadata": {
+        "description": "The list of allowed services",
+        "displayName": "Allowed services"
+      }
+    },
+    "allowedVmSkus": {
+      "type": "array",
+      "metadata": {
+        "description": "The list of allowed VM SKUs",
+        "displayName": "Allowed VM SKUs"
+      }
+    },
+    "allowedVMExtensions": {
+      "type": "array",
+      "metadata": {
+        "description": "The list of extensions allowed for the VM",
+        "displayName": "Allowed VM Extensions"
+      }
+    },
+    "allowedOMSTier": {
+      "type": "array",
+      "metadata": {
+        "description": "List of allowed tier for Log Analytics workspace",
+        "displayName": "Allowed OMS SKU"
+      }
+    }
+  },
+  "displayName": "Azure CLI Policy",
+  "description": "This policy restricts what is allowed in the Azure CLI Lab.",
+  "policyRule": {
+    "if": {
+      "anyOf": [
+        {
+          "not": {
+            "field": "type",
+            "in": "[parameters('allowedServices')]"
+          }
+        },
+        {
+          "not": {
+            "field": "location",
+            "in": "[parameters('allowedLocations')]"
+          }
+        },
+        {
+          "allOf": [
+            {
+              "field": "type",
+              "equals": "Microsoft.Compute/virtualMachines"
+            },
+            {
+              "not": {
+                "field": "Microsoft.Compute/virtualMachines/sku.name",
+                "in": "[parameters('allowedVmSkus')]"
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "field": "type",
+              "equals": "Microsoft.Compute/virtualMachines/extensions"
+            },
+            {
+              "not": {
+                "field": "Microsoft.Compute/virtualMachines/extensions/type",
+                "in": "[parameters('allowedVMExtensions')]"
+              }
+            }
+          ]
+        },
+        {
+          "allof": [
+            {
+              "field": "type",
+              "equals": "Microsoft.operationalinsights/workspaces"
+            },
+            {
+              "not": {
+                "field": "Microsoft.operationalinsights/workspaces/sku.name",
+                "in": "[parameters('allowedOMSTier')]"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "then": {
+      "effect": "deny"
+    }
+  },
+  "parameters_values": {
+    "allowedLocations": {
+      "value": ["westus", "southcentralus", "eastus", "{RGLocation}"]
+    },
+    "allowedServices": {
+      "value": [
+        "Microsoft.Storage/storageAccounts",
+        "Microsoft.Resources/deployments",
+        "Microsoft.Authorization/roleAssignments",
+        "Microsoft.Authorization/roleDefinitions",
+        "Microsoft.Resources/deploymentScripts",
+        "Microsoft.ManagedIdentity/userAssignedIdentities",
+        "Microsoft.ContainerInstance/containerGroups",
+        "Microsoft.OperationalInsights/workspaces",
+        "Microsoft.OperationalInsights/workspaces/datasources",
+        "Microsoft.OperationalInsights/workspaces/savedSearches",
+        "Microsoft.OperationalInsights/solutions",
+        "Microsoft.OperationsManagement/solutions",
+        "Microsoft.OperationsManagement/managementConfigurations",
+        "Microsoft.OperationsManagement/managementAssociations",
+        "Microsoft.Insights/diagnosticSettings",
+        "Microsoft.SecurityInsights/register",
+        "Microsoft.SecurityInsights/cases",
+        "Microsoft.SecurityInsights/incidents",
+        "Microsoft.SecurityInsights/onboardingStates",
+        "Microsoft.Compute/virtualMachines",
+        "Microsoft.Compute/virtualMachines/extensions",
+        "Microsoft.Network/virtualNetworks",
+        "Microsoft.Network/publicIpAddresses",
+        "Microsoft.Storage/storageAccounts/blobServices/containers",
+        "Microsoft.Network/networkInterfaces",
+        "Microsoft.Insights/dataCollectionRules",
+        "Microsoft.Compute/disks",
+        "Microsoft.Network/networkSecurityGroups",
+        "Microsoft.Insights/DataCollectionEndpoints",
+        "Microsoft.Insights/DataCollectionRuleAssociations",
+        "Microsoft.SecurityInsights/alertRules",
+        "Microsoft.SecurityInsights/dataConnectors",
+        "Microsoft.SecurityInsights/dataConnectorDefinitions",
+        "Microsoft.SecurityInsights/dataConnectorsCheckRequirements/action",
+        "Microsoft.SecurityInsights/ContentTemplates",
+        "Microsoft.SecurityInsights/ContentPackages",
+        "Microsoft.SecurityInsights/Metadata",
+        "Microsoft.Web/connections",
+        "Microsoft.Logic/workflows",
+        "Microsoft.SecurityInsights/Watchlists",
+        "Microsoft.Resources/deploymentScripts/runPowerShellInline",
+        "Microsoft.Resources/deployments/ingestEvents",
+        "Microsoft.OperationalInsights/workspaces/tables"
+      ]
+    },
+    "allowedVmSkus": {
+      "value": ["Standard_B1ms"]
+    },
+    "allowedVMExtensions": {
+      "value": [
+        "Microsoft.EnterpriseCloud.Monitoring.MicrosoftMonitoringAgent",
+        "MicrosoftMonitoringAgent",
+        "Microsoft.EnterpriseCloud.Monitoring",
+        "AzureMonitorWindowsAgent"
+      ]
+    },
+    "allowedOMSTier": {
+      "value": ["PerGB2018",
+                "Free"]
+    }
+  }
+}

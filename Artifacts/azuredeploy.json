@@ -63,26 +63,6 @@
             }
         },
         {
-            "name": "alertRules",
-            "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2020-06-01",
-            "dependsOn": [
-                "[resourceId('Microsoft.Resources/deployments','workbook')]"
-            ],
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "[uri(variables('_artifactsLocation'), 'Artifacts/LinkedTemplates/alertRules.json')]",
-                    "contentVersion": "1.0.0.0"
-                },
-                "parameters": {
-                    "workspaceName": {
-                        "value": "[parameters('workspaceName')]"
-                    }
-                }
-            }
-        },
-        {
             "name": "playbook",
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2020-06-01",
